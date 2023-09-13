@@ -1,1 +1,1 @@
-# SBSshooter
+# Step-by-step shooter
