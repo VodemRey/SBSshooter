@@ -8,9 +8,18 @@
 
 using namespace std;
 
-/*
-*
+/* TODO
+1. PrintPlayers: Try to use auto &p : players instead of auto p : players to get players's adress, not copy of it
+2. GiveWeapons: Make it void. with no return, just to change players vector
+3. Bring to mind ENUM function to make code more readable
+4. Try catch throw - eroor handing
+5. PrintPlayers: Add HP, Level to show
+6. To think if the main player on the 0 position at the same vector as bots is a good idea?
+7. Possible move functions to another file folder to create 
+8. Main game logic
 */
+
+
 enum Players {main_player = 0, bot1, bot2, bot3, bot4};
 vector<Player> CreatePlayers() {
     //MainPlayerCreating
@@ -97,12 +106,12 @@ vector<Player> GiveWeapons(vector<Player>& players) {
         
     }
     players[main_player].SetWeapon(weapons[choice-1]);
-  
+
+    // Generating random names for players using a random number algorithm (copied from ChatGPT)
     random_device rd;
     mt19937 gen(rd());
     uniform_int_distribution<int> weaponDistribution(0, weapons.size() - 1);
 
-    // Выдаем случайное оружие каждому игроку
     for (Player& player : players) {
         int randomWeaponIndex = weaponDistribution(gen);
         player.SetWeapon(weapons[randomWeaponIndex]);
@@ -121,28 +130,12 @@ void Greetings() {
     }
 }
     int main() {
-    //START//
     
+//START//
     Greetings();
     vector<Player> players = CreatePlayers();
     players = GiveWeapons(players);
     PrintPlayers(players);
-
-    ////players dashboard
-    // 
-    ////WEAPON DASHBOARD
-    //system("cls");
-    //cout << "There are players with their weapons for this game:\n";
-    //cout << "----------\n";
-    //cout << MainPlayer.GetName() << " with " << MainPlayer.GetWeapon().GetName() << " (you)\n";
-    //cout << p1.GetName() << " with " << p1.GetWeapon().GetName() << "\n";
-    //cout << p2.GetName() << " with " << p2.GetWeapon().GetName() << "\n";
-    //cout << p3.GetName() << " with " << p3.GetWeapon().GetName() << "\n";
-    //cout << p4.GetName() << " with " << p4.GetWeapon().GetName() << "\n";
-    //cout << "----------\n";
-    ////WEAPON DASHBOARD
-    ////START//
-    //
 
     return 0;
 }
